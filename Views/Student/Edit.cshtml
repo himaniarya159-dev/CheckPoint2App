@@ -1,0 +1,35 @@
+@model CheckPoint2App.Models.Student
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <h2 class="mb-3">Edit Student Details</h2>
+        <form asp-action="Edit" method="post" class="card card-body shadow-sm">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <input asp-for="FirstName" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input asp-for="LastName" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input asp-for="Email" type="email" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Course / Program</label>
+                <input asp-for="Course" class="form-control" required />
+            </div>
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update Student</button>
+            </div>
+        </form>
+    </div>
+</div>

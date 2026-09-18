@@ -1,0 +1,99 @@
+@{
+    ViewData["Title"] = "Help & User Guide";
+}
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="mb-3">Help & User Guide</h1>
+            <p class="lead text-muted">Welcome to the CheckPoint2App documentation and support guide.</p>
+
+            <hr class="mb-4" />
+
+            <!-- Quick Navigation Cards -->
+            <div class="row g-3 mb-5">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">Account Setup</h5>
+                            <p class="card-text small">Learn how to create a profile, fill out details, and sign in to access features.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">Student Records</h5>
+                            <p class="card-text small">Manage student entries, view full lists, and perform search updates.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">System Support</h5>
+                            <p class="card-text small">Troubleshoot login issues or contact technical support for assistance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Guide -->
+            <div class="accordion shadow-sm" id="helpAccordion">
+                
+                <!-- Topic 1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <strong>1. How do I register a new account?</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#helpAccordion">
+                        <div class="accordion-body">
+                            Navigate to the <strong>Register</strong> link in the top right of the navigation bar. Fill out your personal details including <em>Email ID, Password, Name, Contact, and Location Address</em>, then click <strong>Register</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topic 2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <strong>2. How do I sign in?</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#helpAccordion">
+                        <div class="accordion-body">
+                            Click on <strong>Login</strong> in the top navigation bar. Enter your registered <strong>Email ID</strong> and <strong>Password</strong>, then click <strong>Login</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topic 3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <strong>3. Managing Student Records</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#helpAccordion">
+                        <div class="accordion-body">
+                            Access the <strong>Student List</strong> tab from the navigation header to view, add, edit, or delete student profiles in the database.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Support Contact -->
+            <div class="card bg-light mt-5 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <h4>Need Additional Assistance?</h4>
+                    <p class="mb-2">If you encounter issues not covered in this guide, contact our support team.</p>
+                    <a href="mailto:support@checkpoint2app.local" class="btn btn-outline-primary">Contact Support</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
