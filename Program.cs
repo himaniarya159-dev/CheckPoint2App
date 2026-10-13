@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using CheckPoint2App.Data;
 using CheckPoint2App.Models;
@@ -6,8 +7,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register SQLite Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// --- 1. ADD COOKIE AUTHENTICATION SERVICE ---
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/Login";
+        options.ExpireTimeSpan = TimeSpan.FromHours(8);
+    });
 
 var app = builder.Build();
 
@@ -23,6 +35,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// --- 2. ENABLE AUTHENTICATION MIDDLEWARE ---
+// Must come after UseRouting() and before UseAuthorization()
+app.UseAuthentication();
 app.UseAuthorization();
 
 // --- DATABASE INITIALIZATION BLOCK ---

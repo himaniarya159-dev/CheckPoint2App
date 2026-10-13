@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CheckPoint2App.Data;
 using CheckPoint2App.Models;
 
 namespace CheckPoint2App.Controllers;
 
+[Authorize]
 public class StudentController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -29,6 +31,7 @@ public class StudentController : Controller
 
     // POST: /Student/Create
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Create(Student student)
     {
         if (ModelState.IsValid)
@@ -54,6 +57,7 @@ public class StudentController : Controller
 
     // POST: /Student/Edit/5
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Edit(Student student)
     {
         if (ModelState.IsValid)
@@ -67,6 +71,7 @@ public class StudentController : Controller
 
     // POST: /Student/Delete/5
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Delete(int id)
     {
         var student = _context.Students.Find(id);
