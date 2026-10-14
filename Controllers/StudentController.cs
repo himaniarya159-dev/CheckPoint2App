@@ -16,10 +16,35 @@ public class StudentController : Controller
     }
 
     // GET: /Student
-    public IActionResult Index()
+    // Supports searching (searchString) and sorting (sortOrder)
+    public IActionResult Index(string searchString, string sortOrder)
     {
-        var students = _context.Students.ToList();
-        return View(students);
+        // Set up sorting parameters for Razor view headers
+        ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        ViewData["CourseSortParm"] = sortOrder == "Course" ? "course_desc" : "Course";
+        ViewData["CurrentFilter"] = searchString;
+
+        var students = _context.Students.AsQueryable();
+
+        // 1. Search Filter Logic
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            students = students.Where(s => s.FirstName.Contains(searchString) ||
+                                           s.LastName.Contains(searchString) ||
+                                           s.Email.Contains(searchString) ||
+                                           s.Course.Contains(searchString));
+        }
+
+        // 2. Sorting Logic
+        students = sortOrder switch
+        {
+            "name_desc" => students.OrderByDescending(s => s.LastName),
+            "Course" => students.OrderBy(s => s.Course),
+            "course_desc" => students.OrderByDescending(s => s.Course),
+            _ => students.OrderBy(s => s.LastName)
+        };
+
+        return View(students.ToList());
     }
 
     // GET: /Student/Create
@@ -38,6 +63,8 @@ public class StudentController : Controller
         {
             _context.Students.Add(student);
             _context.SaveChanges();
+
+            TempData["Success"] = "Student record created successfully!";
             return RedirectToAction(nameof(Index));
         }
         return View(student);
@@ -64,6 +91,8 @@ public class StudentController : Controller
         {
             _context.Students.Update(student);
             _context.SaveChanges();
+
+            TempData["Success"] = "Student details updated successfully!";
             return RedirectToAction(nameof(Index));
         }
         return View(student);
@@ -79,6 +108,12 @@ public class StudentController : Controller
         {
             _context.Students.Remove(student);
             _context.SaveChanges();
+
+            TempData["Success"] = "Student deleted successfully!";
+        }
+        else
+        {
+            TempData["Error"] = "Student record not found.";
         }
         return RedirectToAction(nameof(Index));
     }
